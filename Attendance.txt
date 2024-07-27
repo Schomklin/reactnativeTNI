@@ -1,4 +1,5 @@
 student Id : 00177
 Name:Amonpan Chomklin
 
+git push origin main -f
 
