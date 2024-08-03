@@ -3,13 +3,13 @@ import { View, Text } from 'react-native';
 import { stylesPractice} from '../styles/styles';
 
 interface AppFooterProps {
-  footerText: string;
+  footerMessage: string;
 }
 
-const AppFooter: React.FC<AppFooterProps> = ({ footerText }) => {
+const AppFooter = ({ footerMessage }:AppFooterProps):React.JSX.Element => {
   return (
     <View style={stylesPractice.footer}>
-      <Text style={stylesPractice.footerText}>{footerText}</Text>
+      <Text style={stylesPractice.footerText}>{footerMessage}</Text>
     </View>
   );
 };

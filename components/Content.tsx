@@ -4,14 +4,23 @@ import { stylesPractice} from '../styles/styles';
 
 interface ContentProps {
   message: string;
-  title: string;
+  fullname: string;
 }
 
-const Content: React.FC<ContentProps> = ({ title, message }) => {
+const Content = ({ message, fullname }: ContentProps):React.JSX.Element => {
+
+  const [displayFullname,setDisplayFullname] = React.useState('');
+
+  const handleButtonClick = () =>{
+    setDisplayFullname(fullname);
+    Alert.alert("Hello",`Input your fullname : ${fullname}`);
+  };
+
   return (
     <View style={stylesPractice.content}>
       <Text style={stylesPractice.text}>{message}</Text>
-      <Button title="Click Me" onPress={() => Alert.alert("Hello", title)} />
+      <Text style={stylesPractice.text}>{displayFullname} </Text>      
+      <Button title="Click Me" onPress={handleButtonClick} />
     </View>
   );
 };
