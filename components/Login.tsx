@@ -11,8 +11,7 @@ const Login = () => {
       />
       <TextInput
         style={stylesLogin.input}
-        placeholder="Enter Email"
-       
+        placeholder="Enter Email"       
         keyboardType="email-address"
       />
       <View >
