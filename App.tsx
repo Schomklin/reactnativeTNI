@@ -4,6 +4,8 @@ import "react-native-gesture-handler";
 import React, { useState } from "react";
 import { HeaderButtonsProvider } from "react-navigation-header-buttons";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Provider } from "react-redux";
+import { store } from "./redux-toolkit/store";
 
 import HomeScreen from "./screens/HomeScreen";
 import AboutScreen from "./screens/AboutScreen";
@@ -79,32 +81,36 @@ function LoginStackScreen() {
 
 const App = (): React.JSX.Element => {
   const [isLogin] = useState(false);
-
   return (
     <>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <HeaderButtonsProvider stackType="native">
-            {isLogin ? (
-              <Drawer.Navigator
-                screenOptions={{ headerShown: false }}
-                drawerContent={(props) => <MenuScreen {...props} />}
-              >
-                <Drawer.Screen name="HomeStack" component={HomeStackScreen} />
-                <Drawer.Screen
-                  name="ProductStack"
-                  component={ProductStackScreen}
-                />
-              </Drawer.Navigator>
-            ) : (
-              <LoginStackScreen />
-            )}
-          </HeaderButtonsProvider>
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <HeaderButtonsProvider stackType="native">
+        {isLogin ? (
+          <Drawer.Navigator
+            screenOptions={{ headerShown: false }}
+            drawerContent={(props) => <MenuScreen {...props} />}
+          >
+            <Drawer.Screen name="HomeStack" component={HomeStackScreen} />
+            <Drawer.Screen name="ProductStack" component={ProductStackScreen} />
+          </Drawer.Navigator>
+        ) : (
+          <LoginStackScreen />
+        )}
+      </HeaderButtonsProvider>
       <Toast />
     </>
   );
 };
 
-export default App;
+const AppWrapper = () => {
+  return (
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <App/>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </Provider>
+  );
+};
+
+export default AppWrapper;
